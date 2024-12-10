@@ -1,0 +1,123 @@
+for token generation and refresh
+   a. POST : http://127.0.0.1:8000/api/token/
+        input:
+            {
+                "username": "AdminTaxiSystem",
+                "password": "BlueFox333#]"
+            }
+
+   b. POST : http://127.0.0.1:8000/api/token/refresh/
+        input:
+            {
+                "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczMzY0NzM2NywiaWF0IjoxNzMzNTYwOTY3LCJqdGkiOiIwMzdlOWIyMTRjY2Y0ZjZjOWZhNzczOGExNmZmYWUyNiIsInVzZXJfaWQiOjF9.QTJ8v1haOprfwDSVh9LNGs59BCigVGILApExCbHxAs8"
+            }
+        
+        output:
+            {
+                "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMzNjM4MzMwLCJpYXQiOjE3MzM1NjA5NjcsImp0aSI6ImJjNDMzMzczMDRkYTQ0MTRiOThlMzM3Y2MzODVkYTg3IiwidXNlcl9pZCI6MX0.H_Q1VSMZnkIDAvUIFDYMCtcauNmx-4h-rvcwlU2Y9sM"
+            }
+
+for rider 
+    a. Rider Registration : Method POST
+        api : http://127.0.0.1:8000/api/rider/register/
+
+        input:
+            {
+                "first_name": "Sujan",
+                "last_name": "Ghimire",
+                "email": "sujghi@gmail.com",
+                "username": "gSujan",
+                "password": "user123",
+                "contact_no": "9876543210",
+                "gender": "Male",
+                "address": "Kathmandu"
+            }
+        
+        output: data display in the user profile 
+            {
+                "message": "Rider registered successfully!",
+                "data": {
+                    "id": 1,
+                    "first_name": "Sujan",
+                    "last_name": "Ghimire",
+                    "email": "sujghi@gmail.com",
+                    "username": "gSujan",
+                    "password": "pbkdf2_sha256$870000$q3PViQQy5M9ZuFD1X1Acpe$tntP0C5RpgtGmEo8q/8BcdMxgaaS9rbAIVGK35Jog2k=",
+                    "gender": "Male",
+                    "address": "Kathmandu",
+                    "contact_no": "9876543210",
+                    "created_date": "2024-12-08T07:15:24.678539Z",
+                    "status": "pending"
+                }
+            }
+
+    b. fetching rider list and display in the admin panel 
+        GET : http://127.0.0.1:8000/api/adminPortal/riders/    
+    
+
+    c. Rider updation
+        PUT : http://127.0.0.1:8000/api/rider/1/edit/
+
+        INPUT:
+        {
+            "rider": {
+                "first_name": "John",
+                "last_name": "Doe",
+                "email": "johndoe@example.com",
+                "address": "New Address",
+                "contact_no": "9876543210",
+                "status" : "active"
+            },
+            "bank": {
+                "bank_name": "Sample Bank",
+                "bank_code": "SB123",
+                "account_holder_name": "John Doe",
+                "account_number": "1234567890",
+                "routing_number": "123456",
+                "bank_iban": "SB1234567890",
+                "bank_swift": "SWIFT123",
+                "address": "Bank Address"
+            }
+        }
+    
+    d. Rider deletion
+        DELETE : http://127.0.0.1:8000/api/rider/delete/1/
+
+        if user exists:
+        {
+            "message": "Rider deleted successfully!"
+        }
+
+        if user doesnot exists:
+        {
+            "detail": "Rider not found."
+        }
+
+
+
+
+
+for service 
+    a. Service Addition
+    POST : http://127.0.0.1:8000/api/adminPortal/add-service/
+
+        INPUT:
+        {
+            "name": "Premium Cab",
+            "region": 1,
+            "capacity": 4,
+            "base_fare": 150.00,
+            "minimum_fare": 100.00,
+            "minimum_distance": 5.0,
+            "per_distance": 15.0,
+            "per_minute_drive": 2.5,
+            "waiting_time_limit": 10,
+            "per_minute_wait": 1.0,
+            "cancellation_fee": 50.0,
+            "payment_method": "cash_wallet",
+            "commission_type": "percentage",
+            "admin_commission": 20.0,
+            "status": "active",
+            "description": "Premium service with comfortable rides.",
+            "image": null
+        }
