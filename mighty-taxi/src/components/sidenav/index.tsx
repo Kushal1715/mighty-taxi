@@ -18,6 +18,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { Collapse } from '@mui/material';
+import { FaCar, FaCarSide, FaGift, FaGlobe, FaHome, FaIdCard, FaList, FaPlus, FaUser } from 'react-icons/fa';
+import { MdAddBox } from 'react-icons/md';
+import { NavItem } from '@/interface/data';
+import { IoIosDocument } from 'react-icons/io';
 
 const drawerWidth = 240;
 
@@ -120,6 +124,296 @@ export default function SideNav() {
     setOpenMenu(!openMenu)
   };
 
+
+
+  const navitems: NavItem[] = [
+    {
+      icon: <FaPlus />,
+      item: "Book Now"
+    },
+    {
+      icon: <FaHome />,
+      item: "Dashboard"
+    },
+    {
+      icon: <FaUser />,
+      item: "Rider",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Rider List"
+        },
+        {
+          childrenIcon: <MdAddBox />,
+          childrenItem: "Add Rider"
+        }
+      ]
+    },
+    {
+      icon: <FaGlobe />,
+      item: "Region",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Region List"
+        },
+        {
+          childrenIcon: <MdAddBox />,
+          childrenItem: "Add Region"
+        }
+      ]
+    },
+    {
+      icon: <FaCar />,
+      item: "Service",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Service List"
+        },
+        {
+          childrenIcon: <MdAddBox />,
+          childrenItem: "Add Service"
+        }
+      ]
+    },
+    {
+      icon: <FaIdCard />,
+      item: "Driver",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Driver List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Pending Driver"
+        },
+        {
+          childrenIcon: <MdAddBox />,
+          childrenItem: "Add Driver"
+        },
+        {
+          childrenIcon: <MdAddBox />,
+          childrenItem: "Manage Driver Document"
+        }
+      ]
+    },
+    {
+      icon: <IoIosDocument />,
+      item: "Document",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Document List"
+        },
+
+        {
+          childrenIcon: <MdAddBox />,
+          childrenItem: "Add Document"
+        },
+
+      ]
+    },
+    {
+      icon: <FaGift />,
+      item: "Cupon",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Cupon List"
+        },
+
+        {
+          childrenIcon: <MdAddBox />,
+          childrenItem: "Add Cupon"
+        },
+
+      ]
+    },
+    {
+      icon: <FaCarSide />,
+      item: "Ride Request",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "All List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "New Ride List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Completed List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Cancelled List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Pending List"
+        },
+      ]
+    },
+    {
+      icon: <FaCarSide />,
+      item: "Complaint",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Resolved List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Pending List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Investigation List"
+        },
+
+      ]
+    },
+    {
+      icon: <FaCarSide />,
+      item: "Surge Price",
+
+    },
+    {
+      icon: <FaCarSide />,
+      item: "Withdraw Request",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "All"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Pending List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Approved List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Decline List"
+        },
+
+      ]
+    },
+    {
+      icon: <FaCarSide />,
+      item: "App Language Setting",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Default Keyword List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Language List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Language with Keyword List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Bulk Import Data List"
+        },
+
+      ]
+    },
+    {
+      icon: <FaCarSide />,
+      item: "Account Setting",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Role List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Permission List"
+        },
+      ]
+    },
+    {
+      icon: <FaCarSide />,
+      item: "Additional Fees",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Additional Fees List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Add Additional Fees"
+        },
+      ]
+    },
+    {
+      icon: <FaCarSide />,
+      item: "SOS",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "SOS List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Add SOS"
+        },
+      ]
+    },
+    {
+      icon: <FaCarSide />,
+      item: "Push Notification",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Push Notification List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Add Push Notification"
+        },
+      ]
+    },
+    {
+      icon: <FaCarSide />,
+      item: "Report",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Admin Report"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Driver Earning"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Service wise"
+        },
+      ]
+    },
+  ]
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -151,124 +445,48 @@ export default function SideNav() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
-          <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton sx={{ minHeight: 48, px: 2.5, gap: 1 }}>
-              <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Book Now"
+        {
+          navitems.map((navItem: NavItem) => <List>
+            <ListItem disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                onClick={() => toggleDrawerMenu(navItem.item)}
                 sx={{
-                  opacity: open ? 1 : 0,
+                  minHeight: 48,
+                  px: 2.5,
+                  gap: 1
                 }}
-              />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <List>
-          <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton sx={{ minHeight: 48, px: 2.5, gap: 1 }}>
-              <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Dashboard"
-                sx={{
-                  opacity: open ? 1 : 0,
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <List>
-          <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              onClick={() => toggleDrawerMenu('rider')}
-              sx={{
-                minHeight: 48,
-                px: 2.5,
-                gap: 1
-              }}
-            >
-              <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Rider"
-                sx={{
-                  opacity: open ? 1 : 0,
-                }}
-              />
-            </ListItemButton>
-            {/* Dropdown menu for Rider */}
-            <Collapse in={openMenu && openDrawer === 'rider'} timeout="auto" unmountOnExit>
-              <List component="div">
-                <ListItemButton sx={{ pl: 3, gap: 1 }}>
-                  <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Rider List" sx={{
+              >
+                <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
+                  {navItem.icon}
+                </ListItemIcon>
+                <ListItemText
+                  primary={navItem.item}
+                  sx={{
                     opacity: open ? 1 : 0,
-                  }} />
-                </ListItemButton>
-                <ListItemButton sx={{ pl: 3, gap: 1 }}>
-                  <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Add Rider" sx={{
-                    opacity: open ? 1 : 0,
-                  }} />
-                </ListItemButton>
+                  }}
+                />
+              </ListItemButton>
+              {
+                navItem.itemChildren && navItem.itemChildren.map((children) => <Collapse in={openMenu && openDrawer === navItem.item} timeout="auto" unmountOnExit>
+                  <List component="div">
+                    <ListItemButton sx={{ pl: 3, gap: 1 }}>
+                      <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
+                        {children.childrenIcon}
+                      </ListItemIcon>
+                      <ListItemText primary={children.childrenItem} sx={{
+                        opacity: open ? 1 : 0,
+                      }} />
+                    </ListItemButton>
 
-              </List>
-            </Collapse>
-          </ListItem>
-        </List>
-        <List>
-          <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton
-              onClick={() => toggleDrawerMenu('region')}
-              sx={{
-                minHeight: 48,
-                px: 2.5,
-                gap: 1
-              }}
-            >
-              <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                <InboxIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Region"
-                sx={{
-                  opacity: open ? 1 : 0,
-                }}
-              />
-            </ListItemButton>
-            {/* Dropdown menu for Rider */}
-            <Collapse in={openMenu && openDrawer === 'region'} timeout="auto" unmountOnExit>
-              <List component="div">
-                <ListItemButton sx={{ pl: 3, gap: 1 }}>
-                  <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Region List" sx={{
-                    opacity: open ? 1 : 0,
-                  }} />
-                </ListItemButton>
-                <ListItemButton sx={{ pl: 3, gap: 1 }}>
-                  <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Add Region" sx={{
-                    opacity: open ? 1 : 0,
-                  }} />
-                </ListItemButton>
 
-              </List>
-            </Collapse>
-          </ListItem>
-        </List>
+                  </List>
+
+                </Collapse>)
+              }
+
+            </ListItem>
+          </List>)
+        }
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
