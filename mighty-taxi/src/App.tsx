@@ -1,12 +1,11 @@
+import SideNav from "@/components/sidenav";
 
-
-function App() {
-
+export default function App() {
   return (
     <>
-      <div>hello</div>
+      <div>
+        <SideNav />
+      </div>
     </>
   )
 }
-
-export default App
