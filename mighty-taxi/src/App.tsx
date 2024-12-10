@@ -1,11 +1,14 @@
-import SideNav from "@/components/sidenav";
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import DashHome from './pages/DashHome'
 
 export default function App() {
   return (
     <>
-      <div>
-        <SideNav />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<DashHome />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
