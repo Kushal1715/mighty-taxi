@@ -1,8 +1,4 @@
-
-
 type Props = {}
-
-
 
 const DashHome = (props: Props) => {
 

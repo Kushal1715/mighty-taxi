@@ -2,21 +2,17 @@ import * as React from 'react';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
+// import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { Collapse } from '@mui/material';
 import { FaAngleDown, FaAngleRight, FaCar, FaCarSide, FaDollarSign, FaGift, FaGlobe, FaHome, FaIdCard, FaList, FaLocationArrow, FaPlus, FaUser } from 'react-icons/fa';
 import { MdAddBox, MdOutlineSos } from 'react-icons/md';
@@ -62,9 +58,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
+// interface AppBarProps extends MuiAppBarProps {
+//   open?: boolean;
+// }
 
 
 
@@ -98,7 +94,6 @@ export default function SideNav() {
   const [openMenu, setOpenMenu] = React.useState<boolean>(false);
   const navigate = useNavigate();
 
-
   const handleRoute = (route?: string) => {
     if (route) {
       navigate(route)
@@ -107,13 +102,10 @@ export default function SideNav() {
     }
   }
 
-
   const toggleDrawerMenu = (menu: any) => {
     setOpenDrawer(menu)
     setOpenMenu(!openMenu)
   };
-
-
 
   const navitems: NavItem[] = [
     {
@@ -239,27 +231,27 @@ export default function SideNav() {
         {
           childrenIcon: <FaList />,
           childrenItem: "All List",
-          route: "/ride-all-list"
+          route: "/ride-request-all"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "New Ride List",
-          route: "/ride-new-list"
+          route: "/ride-request-new"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Completed List",
-          route: "/ride-completed-list"
+          route: "/ride-request-completed"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Cancelled List",
-          route: "/ride-cancelled-list"
+          route: "/ride-request-cancelled"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Pending List",
-          route: "/ride-pending-list"
+          route: "/ride-request-pending"
         }
       ]
     },
@@ -270,17 +262,17 @@ export default function SideNav() {
         {
           childrenIcon: <FaList />,
           childrenItem: "Resolved List",
-          route: "/complaint-resolved-list"
+          route: "/complaint-resolved"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Pending List",
-          route: "/complaint-pending-list"
+          route: "/complaint-pending"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Investigation List",
-          route: "/complaint-investigation-list"
+          route: "/complaint-investigation"
         }
       ]
     },
@@ -295,22 +287,22 @@ export default function SideNav() {
         {
           childrenIcon: <FaList />,
           childrenItem: "All",
-          route: "/withdraw-all"
+          route: "/withdraw-request-all"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Pending List",
-          route: "/withdraw-pending-list"
+          route: "/withdraw-request-pending-list"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Approved List",
-          route: "/withdraw-approved-list"
+          route: "/withdraw-request-approved-list"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Decline List",
-          route: "/withdraw-decline-list"
+          route: "/withdraw-request-decline-list"
         }
       ]
     },
@@ -321,22 +313,22 @@ export default function SideNav() {
         {
           childrenIcon: <FaList />,
           childrenItem: "Default Keyword List",
-          route: "/keyword-list"
+          route: "/app-language-setting-default-keyword"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Language List",
-          route: "/language-list"
+          route: "/app-language-setting-language-list"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Language with Keyword List",
-          route: "/language-keyword-list"
+          route: "/app-language-setting-language-with-keyword-list"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Bulk Import Data List",
-          route: "/bulk-import-data-list"
+          route: "/app-language-setting-bulk-import-data-list"
         }
       ]
     },
@@ -347,12 +339,12 @@ export default function SideNav() {
         {
           childrenIcon: <FaList />,
           childrenItem: "Role List",
-          route: "/role-list"
+          route: "/account-setting-role-list"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Permission List",
-          route: "/permission-list"
+          route: "/account-setting-permission-list"
         }
       ]
     },
@@ -438,7 +430,7 @@ export default function SideNav() {
         {
           childrenIcon: <FaList />,
           childrenItem: "Terms and Condition",
-          route: "/terms-condition"
+          route: "/terms-and-condition"
         },
         {
           childrenIcon: <FaList />,
@@ -450,10 +442,12 @@ export default function SideNav() {
     {
       icon: <FaLocationArrow />,
       item: "Driver Location",
+      route: "/driver-location"
     },
     {
       icon: <IoSettings />,
       item: "Setting",
+      route: "/setting"
     },
     {
       icon: <FaWebflow />,
@@ -462,32 +456,32 @@ export default function SideNav() {
         {
           childrenIcon: <FaList />,
           childrenItem: "Information",
-          route: "/website-info"
+          route: "/website-section-information"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Our Mission",
-          route: "/our-mission"
+          route: "/website-section-our-mission"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Why Choose",
-          route: "/why-choose"
+          route: "/website-section-why-choose"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Client Testimonials",
-          route: "/client-testimonials"
+          route: "/website-section-client-testimonials"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Download App",
-          route: "/download-app"
+          route: "/website-section-download-app"
         },
         {
           childrenIcon: <FaList />,
           childrenItem: "Contact Info",
-          route: "/contact-info"
+          route: "/website-section-contact-info"
         }
       ]
     },
@@ -496,9 +490,7 @@ export default function SideNav() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-
       <Drawer variant="permanent" open={open} sx={{
-
         '& .MuiDrawer-paper': {
           overflowY: 'auto', // Ensure content scrolls
           scrollbarWidth: 'none', // Hide scrollbar in Firefox
@@ -550,7 +542,6 @@ export default function SideNav() {
                       opacity: open ? 1 : 0,
                       transition: 'opacity 0.3s ease', // Smooth opacity transition
                     }}
-
                   />
                   {openMenu && openDrawer === navItem.item ? navItem.itemChildren && <Box sx={{
                     opacity: open ? 1 : 0,
@@ -558,7 +549,6 @@ export default function SideNav() {
                     opacity: open ? 1 : 0,
                   }}><FaAngleRight /></Box>}
                 </Box>
-
               </ListItemButton>
               {
                 navItem.itemChildren && navItem.itemChildren.map((children) => <Collapse in={openMenu && openDrawer === navItem.item} timeout="auto" unmountOnExit>
@@ -571,18 +561,13 @@ export default function SideNav() {
                         opacity: open ? 1 : 0,
                       }} />
                     </ListItemButton>
-
-
                   </List>
-
                 </Collapse>)
               }
-
             </ListItem>
           </List>)
         }
       </Drawer>
-
     </Box>
   );
 }
