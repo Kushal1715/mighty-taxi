@@ -1,14 +1,14 @@
-import SideNav from '@/components/sidenav'
-import React from 'react'
+
 
 type Props = {}
 
+
+
 const DashHome = (props: Props) => {
+
   return (
     <>
-      <SideNav />
-      <div>home</div>
-
+      <h1>Home</h1>
     </>
   )
 }

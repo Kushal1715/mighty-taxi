@@ -28,6 +28,7 @@ import { RiFolderSettingsFill, RiUserSettingsFill } from 'react-icons/ri';
 import { HiDocumentText, HiOutlineDocumentReport } from 'react-icons/hi';
 import { TbSpeakerphone } from 'react-icons/tb';
 import { FaWebflow } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -65,28 +66,7 @@ interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  variants: [
-    {
-      props: ({ open }) => open,
-      style: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-      },
-    },
-  ],
-}));
+
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(({ theme }) => ({
   width: drawerWidth,
@@ -116,14 +96,17 @@ export default function SideNav() {
   const [open, setOpen] = React.useState<boolean>(true);
   const [openDrawer, setOpenDrawer] = React.useState<any>(null);
   const [openMenu, setOpenMenu] = React.useState<boolean>(false);
+  const navigate = useNavigate();
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const handleRoute = (route?: string) => {
+    if (route) {
+      navigate(route)
+    } else {
+      console.log("route doesnot exist")
+    }
+  }
+
 
   const toggleDrawerMenu = (menu: any) => {
     setOpenDrawer(menu)
@@ -135,11 +118,13 @@ export default function SideNav() {
   const navitems: NavItem[] = [
     {
       icon: <FaPlus />,
-      item: "Book Now"
+      item: "Book Now",
+      route: "/book-now"
     },
     {
       icon: <FaHome />,
-      item: "Dashboard"
+      item: "Dashboard",
+      route: "/"
     },
     {
       icon: <FaUser />,
@@ -147,11 +132,13 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Rider List"
+          childrenItem: "Rider List",
+          route: '/rider-list'
         },
         {
           childrenIcon: <MdAddBox />,
-          childrenItem: "Add Rider"
+          childrenItem: "Add Rider",
+          route: '/add-rider'
         }
       ]
     },
@@ -161,11 +148,13 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Region List"
+          childrenItem: "Region List",
+          route: "/region-list"
         },
         {
           childrenIcon: <MdAddBox />,
-          childrenItem: "Add Region"
+          childrenItem: "Add Region",
+          route: "/add-region"
         }
       ]
     },
@@ -175,11 +164,13 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Service List"
+          childrenItem: "Service List",
+          route: "/service-list"
         },
         {
           childrenIcon: <MdAddBox />,
-          childrenItem: "Add Service"
+          childrenItem: "Add Service",
+          route: "/add-service"
         }
       ]
     },
@@ -189,19 +180,23 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Driver List"
+          childrenItem: "Driver List",
+          route: "/driver-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Pending Driver"
+          childrenItem: "Pending Driver",
+          route: "/pending-driver"
         },
         {
           childrenIcon: <MdAddBox />,
-          childrenItem: "Add Driver"
+          childrenItem: "Add Driver",
+          route: "/add-driver"
         },
         {
           childrenIcon: <MdAddBox />,
-          childrenItem: "Manage Driver Document"
+          childrenItem: "Manage Driver Document",
+          route: "/manage-driver-document"
         }
       ]
     },
@@ -211,14 +206,14 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Document List"
+          childrenItem: "Document List",
+          route: "/document-list"
         },
-
         {
           childrenIcon: <MdAddBox />,
-          childrenItem: "Add Document"
-        },
-
+          childrenItem: "Add Document",
+          route: "/add-document"
+        }
       ]
     },
     {
@@ -227,14 +222,14 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Cupon List"
+          childrenItem: "Cupon List",
+          route: "/cupon-list"
         },
-
         {
           childrenIcon: <MdAddBox />,
-          childrenItem: "Add Cupon"
-        },
-
+          childrenItem: "Add Cupon",
+          route: "/add-cupon"
+        }
       ]
     },
     {
@@ -243,24 +238,29 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "All List"
+          childrenItem: "All List",
+          route: "/ride-all-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "New Ride List"
+          childrenItem: "New Ride List",
+          route: "/ride-new-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Completed List"
+          childrenItem: "Completed List",
+          route: "/ride-completed-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Cancelled List"
+          childrenItem: "Cancelled List",
+          route: "/ride-cancelled-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Pending List"
-        },
+          childrenItem: "Pending List",
+          route: "/ride-pending-list"
+        }
       ]
     },
     {
@@ -269,23 +269,24 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Resolved List"
+          childrenItem: "Resolved List",
+          route: "/complaint-resolved-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Pending List"
+          childrenItem: "Pending List",
+          route: "/complaint-pending-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Investigation List"
-        },
-
+          childrenItem: "Investigation List",
+          route: "/complaint-investigation-list"
+        }
       ]
     },
     {
       icon: <FaDollarSign />,
       item: "Surge Price",
-
     },
     {
       icon: <ImCreditCard />,
@@ -293,21 +294,24 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "All"
+          childrenItem: "All",
+          route: "/withdraw-all"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Pending List"
+          childrenItem: "Pending List",
+          route: "/withdraw-pending-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Approved List"
+          childrenItem: "Approved List",
+          route: "/withdraw-approved-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Decline List"
-        },
-
+          childrenItem: "Decline List",
+          route: "/withdraw-decline-list"
+        }
       ]
     },
     {
@@ -316,21 +320,24 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Default Keyword List"
+          childrenItem: "Default Keyword List",
+          route: "/keyword-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Language List"
+          childrenItem: "Language List",
+          route: "/language-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Language with Keyword List"
+          childrenItem: "Language with Keyword List",
+          route: "/language-keyword-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Bulk Import Data List"
-        },
-
+          childrenItem: "Bulk Import Data List",
+          route: "/bulk-import-data-list"
+        }
       ]
     },
     {
@@ -339,26 +346,31 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Role List"
+          childrenItem: "Role List",
+          route: "/role-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Permission List"
-        },
+          childrenItem: "Permission List",
+          route: "/permission-list"
+        }
       ]
     },
     {
       icon: <HiDocumentText />,
+
       item: "Additional Fees",
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Additional Fees List"
+          childrenItem: "Additional Fees List",
+          route: "/additional-fees-list"
         },
         {
           childrenIcon: <MdAddBox />,
-          childrenItem: "Add Additional Fees"
-        },
+          childrenItem: "Add Additional Fees",
+          route: "/add-additional-fees"
+        }
       ]
     },
     {
@@ -367,12 +379,14 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "SOS List"
+          childrenItem: "SOS List",
+          route: "/sos-list"
         },
         {
           childrenIcon: <MdAddBox />,
-          childrenItem: "Add SOS"
-        },
+          childrenItem: "Add SOS",
+          route: "/add-sos"
+        }
       ]
     },
     {
@@ -381,12 +395,14 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Push Notification List"
+          childrenItem: "Push Notification List",
+          route: "/push-notification-list"
         },
         {
           childrenIcon: <MdAddBox />,
-          childrenItem: "Add Push Notification"
-        },
+          childrenItem: "Add Push Notification",
+          route: "/add-push-notification"
+        }
       ]
     },
     {
@@ -395,16 +411,19 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Admin Report"
+          childrenItem: "Admin Report",
+          route: "/admin-report"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Driver Earning"
+          childrenItem: "Driver Earning",
+          route: "/driver-earning"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Service wise"
-        },
+          childrenItem: "Service wise",
+          route: "/service-wise-report"
+        }
       ]
     },
     {
@@ -413,27 +432,28 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "List"
+          childrenItem: "List",
+          route: "/pages-list"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Terms and Condition"
+          childrenItem: "Terms and Condition",
+          route: "/terms-condition"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Privacy Policy"
-        },
+          childrenItem: "Privacy Policy",
+          route: "/privacy-policy"
+        }
       ]
     },
     {
       icon: <FaLocationArrow />,
       item: "Driver Location",
-
     },
     {
       icon: <IoSettings />,
       item: "Setting",
-
     },
     {
       icon: <FaWebflow />,
@@ -441,56 +461,42 @@ export default function SideNav() {
       itemChildren: [
         {
           childrenIcon: <FaList />,
-          childrenItem: "Information"
+          childrenItem: "Information",
+          route: "/website-info"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Our Mission"
+          childrenItem: "Our Mission",
+          route: "/our-mission"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Why Choose"
+          childrenItem: "Why Choose",
+          route: "/why-choose"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Client Testimonials"
+          childrenItem: "Client Testimonials",
+          route: "/client-testimonials"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Downloand App"
+          childrenItem: "Download App",
+          route: "/download-app"
         },
         {
           childrenIcon: <FaList />,
-          childrenItem: "Contact Info"
-        },
+          childrenItem: "Contact Info",
+          route: "/contact-info"
+        }
       ]
     },
-  ]
+  ];
 
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={[
-              {
-                marginRight: 5,
-              },
-              open && { display: 'none' },
-            ]}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
+
       <Drawer variant="permanent" open={open} sx={{
 
         '& .MuiDrawer-paper': {
@@ -517,14 +523,14 @@ export default function SideNav() {
         },
       }}>
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={() => setOpen(!open)}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         {
           navitems.map((navItem: NavItem) => <List>
-            <ListItem disablePadding sx={{ display: 'block' }}>
+            <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleRoute(navItem.route)}>
               <ListItemButton
                 onClick={() => toggleDrawerMenu(navItem.item)}
                 sx={{
@@ -536,11 +542,13 @@ export default function SideNav() {
                 <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
                   {navItem.icon}
                 </ListItemIcon>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', }}>
                   <ListItemText
                     primary={navItem.item}
                     sx={{
+                      fontSize: '2em !important', // Set your desired font size here
                       opacity: open ? 1 : 0,
+                      transition: 'opacity 0.3s ease', // Smooth opacity transition
                     }}
 
                   />
@@ -555,7 +563,7 @@ export default function SideNav() {
               {
                 navItem.itemChildren && navItem.itemChildren.map((children) => <Collapse in={openMenu && openDrawer === navItem.item} timeout="auto" unmountOnExit>
                   <List component="div">
-                    <ListItemButton sx={{ pl: 3, gap: 1 }}>
+                    <ListItemButton sx={{ pl: 3, gap: 1 }} onClick={() => navigate(children.route)}>
                       <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
                         {children.childrenIcon}
                       </ListItemIcon>
@@ -574,23 +582,7 @@ export default function SideNav() {
           </List>)
         }
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <Typography sx={{ marginBottom: 2 }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-      </Box>
+
     </Box>
   );
 }
