@@ -18,10 +18,16 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { Collapse } from '@mui/material';
-import { FaAngleDown, FaAngleRight, FaCar, FaCarSide, FaGift, FaGlobe, FaHome, FaIdCard, FaList, FaPlus, FaUser } from 'react-icons/fa';
-import { MdAddBox } from 'react-icons/md';
+import { FaAngleDown, FaAngleRight, FaCar, FaCarSide, FaDollarSign, FaGift, FaGlobe, FaHome, FaIdCard, FaList, FaLocationArrow, FaPlus, FaUser } from 'react-icons/fa';
+import { MdAddBox, MdOutlineSos } from 'react-icons/md';
 import { NavItem } from '@/interface/data';
 import { IoIosDocument } from 'react-icons/io';
+import { IoDocumentTextSharp, IoSettings } from 'react-icons/io5';
+import { ImCreditCard } from 'react-icons/im';
+import { RiFolderSettingsFill, RiUserSettingsFill } from 'react-icons/ri';
+import { HiDocumentText, HiOutlineDocumentReport } from 'react-icons/hi';
+import { TbSpeakerphone } from 'react-icons/tb';
+import { FaWebflow } from 'react-icons/fa6';
 
 const drawerWidth = 240;
 
@@ -258,7 +264,7 @@ export default function SideNav() {
       ]
     },
     {
-      icon: <FaCarSide />,
+      icon: <IoDocumentTextSharp />,
       item: "Complaint",
       itemChildren: [
         {
@@ -277,12 +283,12 @@ export default function SideNav() {
       ]
     },
     {
-      icon: <FaCarSide />,
+      icon: <FaDollarSign />,
       item: "Surge Price",
 
     },
     {
-      icon: <FaCarSide />,
+      icon: <ImCreditCard />,
       item: "Withdraw Request",
       itemChildren: [
         {
@@ -305,7 +311,7 @@ export default function SideNav() {
       ]
     },
     {
-      icon: <FaCarSide />,
+      icon: <RiFolderSettingsFill />,
       item: "App Language Setting",
       itemChildren: [
         {
@@ -328,7 +334,7 @@ export default function SideNav() {
       ]
     },
     {
-      icon: <FaCarSide />,
+      icon: <RiUserSettingsFill />,
       item: "Account Setting",
       itemChildren: [
         {
@@ -342,7 +348,7 @@ export default function SideNav() {
       ]
     },
     {
-      icon: <FaCarSide />,
+      icon: <HiDocumentText />,
       item: "Additional Fees",
       itemChildren: [
         {
@@ -350,13 +356,13 @@ export default function SideNav() {
           childrenItem: "Additional Fees List"
         },
         {
-          childrenIcon: <FaList />,
+          childrenIcon: <MdAddBox />,
           childrenItem: "Add Additional Fees"
         },
       ]
     },
     {
-      icon: <FaCarSide />,
+      icon: <MdOutlineSos />,
       item: "SOS",
       itemChildren: [
         {
@@ -364,13 +370,13 @@ export default function SideNav() {
           childrenItem: "SOS List"
         },
         {
-          childrenIcon: <FaList />,
+          childrenIcon: <MdAddBox />,
           childrenItem: "Add SOS"
         },
       ]
     },
     {
-      icon: <FaCarSide />,
+      icon: <TbSpeakerphone />,
       item: "Push Notification",
       itemChildren: [
         {
@@ -378,13 +384,13 @@ export default function SideNav() {
           childrenItem: "Push Notification List"
         },
         {
-          childrenIcon: <FaList />,
+          childrenIcon: <MdAddBox />,
           childrenItem: "Add Push Notification"
         },
       ]
     },
     {
-      icon: <FaCarSide />,
+      icon: <HiOutlineDocumentReport />,
       item: "Report",
       itemChildren: [
         {
@@ -401,18 +407,65 @@ export default function SideNav() {
         },
       ]
     },
+    {
+      icon: <IoIosDocument />,
+      item: "Pages",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "List"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Terms and Condition"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Privacy Policy"
+        },
+      ]
+    },
+    {
+      icon: <FaLocationArrow />,
+      item: "Driver Location",
+
+    },
+    {
+      icon: <IoSettings />,
+      item: "Setting",
+
+    },
+    {
+      icon: <FaWebflow />,
+      item: "Website Section",
+      itemChildren: [
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Information"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Our Mission"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Why Choose"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Client Testimonials"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Downloand App"
+        },
+        {
+          childrenIcon: <FaList />,
+          childrenItem: "Contact Info"
+        },
+      ]
+    },
   ]
-
-
-
-
-
-
-
-
-
-
-
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -483,15 +536,14 @@ export default function SideNav() {
                 <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
                   {navItem.icon}
                 </ListItemIcon>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                   <ListItemText
+                    primary={navItem.item}
                     sx={{
-                      fontSize: '16px', // Set your desired font size here
                       opacity: open ? 1 : 0,
-                      transition: 'opacity 0.3s ease', // Smooth opacity transition
                     }}
 
-                  >{navItem.item}</ListItemText>
+                  />
                   {openMenu && openDrawer === navItem.item ? navItem.itemChildren && <Box sx={{
                     opacity: open ? 1 : 0,
                   }}><FaAngleDown /></Box> : navItem.itemChildren && <Box sx={{
