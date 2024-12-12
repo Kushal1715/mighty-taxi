@@ -10,11 +10,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-
-
-
-
-
+import { CiDark } from "react-icons/ci";
+import { CiLight } from "react-icons/ci";
+import { Divider } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { toggleDarkMode } from '@/redux/darkmodeSlice';
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -23,6 +23,8 @@ export default function Navbar() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const dispatch = useDispatch()
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -121,11 +123,15 @@ export default function Navbar() {
         <Toolbar>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
+            <Box sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }} >
+
+              <Box sx={{ border: 1, px: 0.5, cursor: 'pointer' }}><CiDark size={25} onClick={() => dispatch(toggleDarkMode())} /></Box>
+              <Box sx={{ border: 1, px: 0.5, cursor: 'pointer' }}><CiLight size={25} onClick={() => dispatch(toggleDarkMode())} /></Box>
+            </Box>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -163,6 +169,6 @@ export default function Navbar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-    </Box>
+    </Box >
   );
 }

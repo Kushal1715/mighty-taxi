@@ -488,7 +488,7 @@ export default function SideNav() {
   ];
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', backgroundColor: 'black' }}>
       <CssBaseline />
       <Drawer variant="permanent" open={open} sx={{
         '& .MuiDrawer-paper': {
@@ -512,10 +512,12 @@ export default function SideNav() {
               backgroundColor: theme.palette.background.default, // Customize track color
             },
           },
+          backgroundColor: 'black',
+          color: 'white'
         },
       }}>
         <DrawerHeader>
-          <IconButton onClick={() => setOpen(!open)}>
+          <IconButton onClick={() => setOpen(!open)} sx={{ color: 'white' }}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
@@ -531,7 +533,7 @@ export default function SideNav() {
                   gap: 1,
                 }}
               >
-                <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
+                <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', color: 'white' }}>
                   {navItem.icon}
                 </ListItemIcon>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', }}>
