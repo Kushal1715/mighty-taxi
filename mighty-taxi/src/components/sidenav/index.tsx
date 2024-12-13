@@ -14,7 +14,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Collapse } from '@mui/material';
-import { FaAngleDown, FaAngleRight, FaCar, FaCarSide, FaDollarSign, FaGift, FaGlobe, FaHome, FaIdCard, FaList, FaLocationArrow, FaPlus, FaUser } from 'react-icons/fa';
+import { FaAngleDown, FaAngleRight, FaCar, FaCarSide, FaDollarSign, FaGift, FaGlobe, FaHamburger, FaHome, FaIdCard, FaList, FaLocationArrow, FaPlus, FaUser } from 'react-icons/fa';
 import { MdAddBox, MdOutlineSos } from 'react-icons/md';
 import { NavItem } from '@/interface/data';
 import { IoIosDocument } from 'react-icons/io';
@@ -27,6 +27,8 @@ import { FaWebflow } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import { HamburgerMenu } from '@refinedev/mui';
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 const drawerWidth = 240;
 
@@ -523,13 +525,28 @@ export default function SideNav() {
         },
       }}>
         <DrawerHeader>
-          <IconButton onClick={() => setOpen(!open)} sx={{ color: textColor }}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between', // Add space between logo and icon
+              width: '100%', // Ensure it stretches across the available width
+            }}
+          >
+
+            <Box sx={{
+              opacity: open ? 1 : 0,
+              cursor: 'pointer',
+              background: 'black'
+            }} onClick={() => navigate('/')}><img src='/logo.png' className='w-10 h-10' /></Box>
+            <IconButton onClick={() => setOpen(!open)} sx={{ color: '#4788ff' }}>
+              {<GiHamburgerMenu className='w-8 h-12' />}
+            </IconButton>
+          </Box>
         </DrawerHeader>
         <Divider />
         {
-          navitems.map((navItem: NavItem) => <List>
+          navitems.map((navItem: NavItem, i) => <List key={i}>
             <ListItem disablePadding sx={{ display: 'block' }} onClick={() => handleRoute(navItem.route)}>
               <ListItemButton
                 onClick={() => toggleDrawerMenu(navItem.item)}
@@ -559,7 +576,7 @@ export default function SideNav() {
                 </Box>
               </ListItemButton>
               {
-                navItem.itemChildren && navItem.itemChildren.map((children) => <Collapse in={openMenu && openDrawer === navItem.item} timeout="auto" unmountOnExit>
+                navItem.itemChildren && navItem.itemChildren.map((children, index) => <Collapse in={openMenu && openDrawer === navItem.item} timeout="auto" unmountOnExit key={index}>
                   <List component="div">
                     <ListItemButton sx={{ pl: 3, gap: 1 }} onClick={() => navigate(children.route)}>
                       <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', color: textColor }}>

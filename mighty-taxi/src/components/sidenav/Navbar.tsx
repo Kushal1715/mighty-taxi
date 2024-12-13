@@ -122,6 +122,10 @@ export default function Navbar() {
   const textColor = dark ? 'white' : 'black';
 
 
+  const bgIcon = dark ? '#4788ff' : 'white'
+  const bgIcon2 = dark ? 'black' : '#4788ff'
+
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: bgColor, color: textColor, boxShadow: 'none' }}>
@@ -133,16 +137,19 @@ export default function Navbar() {
               alignItems: 'center',
               justifyContent: 'center',
             }} >
-
-              <Box sx={{ border: 1, px: 0.5, cursor: 'pointer' }}><CiDark size={25} onClick={() => dispatch(toggleDarkMode())} /></Box>
-              <Box sx={{ border: 1, px: 0.5, cursor: 'pointer' }}><CiLight size={25} onClick={() => dispatch(toggleDarkMode())} /></Box>
+              <Box sx={{ border: 1, px: 0.5, cursor: 'pointer', backgroundColor: bgIcon2 }}>
+                <CiDark size={25} onClick={() => dispatch(toggleDarkMode())} className='text-white' />
+              </Box>
+              <Box sx={{ border: 1, px: 0.5, cursor: 'pointer', backgroundColor: bgIcon }}>
+                <CiLight size={25} onClick={() => dispatch(toggleDarkMode())} className={`${dark ? 'text-white' : 'text-[#4788ff]'}`} />
+              </Box>
             </Box>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={17} color={'primary'} >
                 <NotificationsIcon />
               </Badge>
             </IconButton>
