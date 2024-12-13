@@ -13,8 +13,9 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import { CiDark } from "react-icons/ci";
 import { CiLight } from "react-icons/ci";
 import { Divider } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '@/redux/darkmodeSlice';
+import { RootState } from '@/redux/store';
 
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -116,10 +117,14 @@ export default function Navbar() {
       </MenuItem>
     </Menu>
   );
+  const { dark } = useSelector((state: RootState) => state.darkmode)
+  const bgColor = dark ? 'black' : 'white';
+  const textColor = dark ? 'white' : 'black';
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: 'white', color: 'black', boxShadow: 'none' }}>
+      <AppBar position="static" sx={{ backgroundColor: bgColor, color: textColor, boxShadow: 'none' }}>
         <Toolbar>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>

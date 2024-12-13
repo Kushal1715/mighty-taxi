@@ -25,6 +25,8 @@ import { HiDocumentText, HiOutlineDocumentReport } from 'react-icons/hi';
 import { TbSpeakerphone } from 'react-icons/tb';
 import { FaWebflow } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 const drawerWidth = 240;
 
@@ -487,8 +489,12 @@ export default function SideNav() {
     },
   ];
 
+  const { dark } = useSelector((state: RootState) => state.darkmode)
+  const bgColor = dark ? 'black' : 'white';
+  const textColor = dark ? 'white' : 'black';
+
   return (
-    <Box sx={{ display: 'flex', backgroundColor: 'black' }}>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Drawer variant="permanent" open={open} sx={{
         '& .MuiDrawer-paper': {
@@ -512,12 +518,12 @@ export default function SideNav() {
               backgroundColor: theme.palette.background.default, // Customize track color
             },
           },
-          backgroundColor: 'black',
-          color: 'white'
+          backgroundColor: bgColor,
+          color: textColor
         },
       }}>
         <DrawerHeader>
-          <IconButton onClick={() => setOpen(!open)} sx={{ color: 'white' }}>
+          <IconButton onClick={() => setOpen(!open)} sx={{ color: textColor }}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
@@ -533,7 +539,7 @@ export default function SideNav() {
                   gap: 1,
                 }}
               >
-                <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', color: 'white' }}>
+                <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', color: textColor }}>
                   {navItem.icon}
                 </ListItemIcon>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', }}>
@@ -556,7 +562,7 @@ export default function SideNav() {
                 navItem.itemChildren && navItem.itemChildren.map((children) => <Collapse in={openMenu && openDrawer === navItem.item} timeout="auto" unmountOnExit>
                   <List component="div">
                     <ListItemButton sx={{ pl: 3, gap: 1 }} onClick={() => navigate(children.route)}>
-                      <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
+                      <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', color: textColor }}>
                         {children.childrenIcon}
                       </ListItemIcon>
                       <ListItemText primary={children.childrenItem} sx={{

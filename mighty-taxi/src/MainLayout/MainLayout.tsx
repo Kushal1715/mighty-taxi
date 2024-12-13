@@ -9,21 +9,20 @@ type Props = {}
 
 const MainLayout = (props: Props) => {
   const { dark } = useSelector((state: RootState) => state.darkmode)
-  console.log(dark)
+  const bgColor = dark ? 'black' : 'white';
+  const textColor = dark ? 'white' : 'black';
 
   return (
     <>
-      <div className={`${dark ? 'bg-black' : 'bg-white'}`}>
-        <Box sx={{ display: 'flex', }}>
-          <SideNav />
-          <Box component="main" sx={{ flexGrow: 1, p: 0, }}>
-            <Navbar />
-            <Box component="main" sx={{ flexGrow: 1, backgroundColor: '#f7f9ff', }}>
-              <Outlet />
-            </Box>
+      <Box sx={{ display: 'flex', }}>
+        <SideNav />
+        <Box component="main" sx={{ flexGrow: 1, p: 0, }}>
+          <Navbar />
+          <Box component="main" sx={{ flexGrow: 1, p: 2, backgroundColor: bgColor, color: textColor }}>
+            <Outlet />
           </Box>
         </Box>
-      </div >
+      </Box>
     </>
 
   )
