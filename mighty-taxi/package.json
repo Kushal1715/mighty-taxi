@@ -18,6 +18,7 @@
     "@refinedev/core": "^4.56.0",
     "@refinedev/mui": "^5.22.0",
     "@toolpad/core": "^0.10.0",
+    "axios": "^1.7.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",

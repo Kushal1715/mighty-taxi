@@ -55,6 +55,7 @@ import WebsiteSectionClientTestimonials from './pages/WebsiteSection/WebsiteSect
 import WebsiteSectionDownloadApp from './pages/WebsiteSection/WebsiteSectionDownloadApp'
 import WebsiteSectionContactInfo from './pages/WebsiteSection/WebsiteSectionContactInfo'
 import SurgePrice from './pages/SurgePrice'
+import LoginPage from './pages/Login/LoginPage'
 
 export default function App() {
   return (
@@ -118,6 +119,7 @@ export default function App() {
             <Route path="/website-section-download-app" element={<WebsiteSectionDownloadApp />} />
             <Route path="/website-section-contact-info" element={<WebsiteSectionContactInfo />} />
           </Route>
+          <Route path='/login' element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     </>
