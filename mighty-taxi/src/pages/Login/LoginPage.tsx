@@ -1,43 +1,11 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from '@/redux/authSlice';
-import { getAccessToken } from '@/api/auth';
+import React from 'react'
 
-const LoginPage: React.FC = () => {
-  const dispatch = useDispatch();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
+type Props = {}
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const accessToken = await getAccessToken(username, password);
-      const refreshToken = 'some_refresh_token'; // Replace with actual refresh token logic
-      dispatch(login({ accessToken, refreshToken }));
-    } catch (err) {
-      setError('Failed to log in');
-    }
-  };
-
+const LoginPage = (props: Props) => {
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Login</button>
-      {error && <p>{error}</p>}
-    </form>
-  );
-};
+    <div>LoginPage</div>
+  )
+}
 
-export default LoginPage;
+export default LoginPage
