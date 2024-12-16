@@ -1,8 +1,22 @@
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 type Props = {}
 
 const LoginPage = (props: Props) => {
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    if (token) {
+      // Redirect if the user is already logged in
+      navigate('/');
+    }
+  }, [token, navigate]);
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email address').required('email address is required'),
     password: Yup.string().min(5, 'password must be at least 5 characters long').required('password is required')
@@ -14,14 +28,31 @@ const LoginPage = (props: Props) => {
       password: ''
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(values)
+    onSubmit: async (values) => {
+      try {
+        const response = await axios.post('http://localhost:3000/api/auth/signin', values);
+        localStorage.setItem('token', response.data.token)
+        navigate('/')
+      } catch (error: any) {
+        if (error.response) {
+          // Handle errors based on status code
+          if (error.response.status === 404) {
+            setError('Admin not found');
+          } else if (error.response.status === 401) {
+            setError('Invalid password')
+          } else {
+            setError('Something went wrong. Please try again later.');
+          }
+        } else {
+          setError('Network error. Please check your connection.');
+        }
+      }
     }
   })
   return (
     <>
       <section className="bg-[#222]">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
           <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
             <img className="w-16 h-16" src="/logo.png" alt="logo" />
           </a>
@@ -58,6 +89,9 @@ const LoginPage = (props: Props) => {
                   </div>
                   <a href="#" className="text-sm font-medium text-blue-500 hover:underline ">Forgot password?</a>
                 </div>
+                {
+                  error && <p className='text-red-500'>{error}</p>
+                }
                 <button type="submit" className="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
               </form>
             </div>
