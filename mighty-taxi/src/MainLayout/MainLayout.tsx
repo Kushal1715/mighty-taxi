@@ -12,6 +12,8 @@ const MainLayout = (props: Props) => {
   const { dark } = useSelector((state: RootState) => state.darkmode)
   const bgColor = dark ? 'black' : 'white';
   const textColor = dark ? 'white' : 'black';
+  const bgColor2 = dark ? '#222' : '#f7f9ff';
+
 
   const token = localStorage.getItem('token')
 
@@ -22,7 +24,7 @@ const MainLayout = (props: Props) => {
           <SideNav />
           <Box component="main" sx={{ flexGrow: 1, p: 0, }}>
             <Navbar />
-            <Box component="main" sx={{ flexGrow: 1, p: 2, backgroundColor: bgColor, color: textColor }}>
+            <Box component="main" sx={{ flexGrow: 1, p: 2, backgroundColor: bgColor2, color: textColor }}>
               <Outlet />
             </Box>
           </Box>
