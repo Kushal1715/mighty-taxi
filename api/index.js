@@ -1,26 +1,38 @@
-import express from 'express'
+import express from 'express';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-import cors from 'cors'
-import authRoutes from '../routes/auth.js'
-import bcrypt from 'bcryptjs'
+import cors from 'cors';
+import authRoutes from '../routes/auth.js';
+import riderRoutes from '../routes/riderRoutes.js';
+import path from 'path';
+import { fileURLToPath } from 'url'; // Import fileURLToPath to create __dirname
 
-dotenv.config()
+dotenv.config();
 
-mongoose.connect(process.env.MONGO)
-  .then(() => console.log('mongodb is connected'))
-  .catch((err) => {
-    console.log(err)
-  })
+// Fix for __dirname in ES Module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Database connection
+mongoose
+  .connect(process.env.MONGO)
+  .then(() => console.log('MongoDB is connected'))
+  .catch((err) => console.log(err));
+
 const app = express();
 
+// Middleware
 app.use(bodyParser.json());
 app.use(cors());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/riders', riderRoutes);
 
-
-app.listen(3000, () => {
-  console.log('server is running on port 3000')
-})
+// Server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
