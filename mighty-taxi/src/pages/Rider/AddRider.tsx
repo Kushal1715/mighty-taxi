@@ -19,7 +19,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function AddRider() {
   return (
-    <Box sx={{ flexGrow: 2 }}>
+    <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} justifyContent='flex-end'>
         <Grid item xs={1.1}  >
           <BackButton route="/rider-list" />
