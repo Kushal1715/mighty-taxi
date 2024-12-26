@@ -25,9 +25,9 @@ const initialFormValues = {
   username: "",
   password: "",
   contactNumber: "",
-  gender: "male",
+  gender: "Male",
   address: "",
-  profileImage: "/profile.jpg",
+  profileImage: "profile.jpg",
   status: "",
 };
 
@@ -39,7 +39,7 @@ export default function AddRider() {
     const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
 
     if (file && allowedTypes.includes(file.type)) {
-      setFormValues(() => ({ ...formValues, profileImage: file.name }));
+      setFormValues({ ...formValues, profileImage: file.name });
     } else {
       alert("Only PNG, JPG, JPEG, and GIF files are allowed!");
       e.target.value = ""; // Reset file input
@@ -51,6 +51,21 @@ export default function AddRider() {
   };
 
   console.log(formValues);
+  const handleFormSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      const result = await fetch("http://localhost:3000/api/riders/add-rider", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
+      console.log(result);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -109,14 +124,14 @@ export default function AddRider() {
                       <input
                         type="radio"
                         name="status"
-                        value="active"
+                        value="Active"
                         onChange={(e) =>
                           setFormValues({
                             ...formValues,
                             status: e.target.value,
                           })
                         }
-                        checked={formValues.status === "active"}
+                        checked={formValues.status === "Active"}
                       />
                       Active
                     </label>
@@ -124,14 +139,14 @@ export default function AddRider() {
                       <input
                         type="radio"
                         name="status"
-                        value="pending"
+                        value="Pending"
                         onChange={(e) =>
                           setFormValues({
                             ...formValues,
                             status: e.target.value,
                           })
                         }
-                        checked={formValues.status === "pending"}
+                        checked={formValues.status === "Pending"}
                       />
                       Pending
                     </label>
@@ -141,14 +156,14 @@ export default function AddRider() {
                       <input
                         type="radio"
                         name="status"
-                        value="inactive"
+                        value="Inactive"
                         onChange={(e) =>
                           setFormValues({
                             ...formValues,
                             status: e.target.value,
                           })
                         }
-                        checked={formValues.status === "inactive"}
+                        checked={formValues.status === "Inactive"}
                       />
                       Inactive
                     </label>
@@ -156,14 +171,14 @@ export default function AddRider() {
                       <input
                         type="radio"
                         name="status"
-                        value="banned"
+                        value="Banned"
                         onChange={(e) =>
                           setFormValues({
                             ...formValues,
                             status: e.target.value,
                           })
                         }
-                        checked={formValues.status === "banned"}
+                        checked={formValues.status === "Banned"}
                       />
                       Banned
                     </label>
@@ -302,9 +317,9 @@ export default function AddRider() {
                         setFormValues({ ...formValues, gender: e.target.value })
                       }
                     >
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="others">Others</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Others">Others</option>
                     </select>
                   </div>
                   <div className="flex flex-col">
@@ -326,7 +341,10 @@ export default function AddRider() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <button className="p-2 bg-green-500 rounded-lg text-white px-4">
+                  <button
+                    className="p-2 bg-green-500 rounded-lg text-white px-4"
+                    onClick={handleFormSubmit}
+                  >
                     Save
                   </button>
                 </div>
