@@ -65,3 +65,12 @@ export const addRider = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const getRiders = async (req, res) => {
+  try {
+    const riders = await Rider.find({});
+    res.status(200).json(riders);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
