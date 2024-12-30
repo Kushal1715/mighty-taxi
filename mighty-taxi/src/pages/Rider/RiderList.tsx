@@ -22,7 +22,13 @@ const RiderList = (props: Props) => {
   }, []);
 
   console.log(riders);
-  return <div>RiderList</div>;
+  return (
+    <div>
+      {riders.map((rider: any) => (
+        <img src={rider.profileImage} />
+      ))}
+    </div>
+  );
 };
 
 export default RiderList;

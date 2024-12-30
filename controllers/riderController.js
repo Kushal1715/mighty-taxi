@@ -65,12 +65,20 @@ export const addRider = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 export const getRiders = async (req, res) => {
   try {
-    const riders = await Rider.find({});
-    res.status(200).json(riders);
+    const riders = await Rider.find();
+
+    // Map over riders to add full profile image URL
+    const ridersWithImages = riders.map((rider) => ({
+      ...rider.toObject(),
+      profileImage: `${req.protocol}://${req.get("host")}/${
+        rider.profileImage
+      }`,
+    }));
+
+    res.status(200).json(ridersWithImages);
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
