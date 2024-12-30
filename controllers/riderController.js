@@ -1,4 +1,4 @@
-import Rider from '../models/Rider.js';
+import Rider from "../models/Rider.js";
 
 // Add Rider Controller
 export const addRider = async (req, res) => {
@@ -26,11 +26,16 @@ export const addRider = async (req, res) => {
       !gender ||
       !address
     ) {
-      return res.status(400).json({ message: 'All fields are required.' });
+      return res.status(400).json({ message: "All fields are required." });
     }
 
     // Check if a file was uploaded
-    const profileImage = req.file ? req.file.path : null;
+    // const  = req.file ? req.file.path : null;
+    if (req.file) {
+      console.log(req.file);
+    } else {
+      console.log("path not fould");
+    }
 
     // Create new rider
     const newRider = new Rider({
@@ -43,7 +48,7 @@ export const addRider = async (req, res) => {
       gender,
       address,
       status,
-      profileImage,
+      profileImage: req.file.path,
     });
 
     // Save the rider
@@ -53,7 +58,7 @@ export const addRider = async (req, res) => {
     const { password: _, ...riderWithoutPassword } = newRider.toObject();
 
     res.status(201).json({
-      message: 'Rider added successfully',
+      message: "Rider added successfully",
       rider: riderWithoutPassword,
     });
   } catch (error) {

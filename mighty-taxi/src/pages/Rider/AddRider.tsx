@@ -18,6 +18,19 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
+interface FormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  password: string;
+  contactNumber: string;
+  gender: string;
+  address: string;
+  profileImage: string | File; // Allow both string and File types
+  status: string;
+}
+
 const initialFormValues = {
   firstName: "",
   lastName: "",
@@ -27,22 +40,17 @@ const initialFormValues = {
   contactNumber: "",
   gender: "Male",
   address: "",
-  profileImage: "profile.jpg",
+  profileImage: "",
   status: "",
 };
 
 export default function AddRider() {
-  const [formValues, setFormValues] = useState(initialFormValues);
+  const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
-  const handleFileChange = (e: any) => {
-    const file = e.target.files[0];
-    const allowedTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
-
-    if (file && allowedTypes.includes(file.type)) {
-      setFormValues({ ...formValues, profileImage: file.name });
-    } else {
-      alert("Only PNG, JPG, JPEG, and GIF files are allowed!");
-      e.target.value = ""; // Reset file input
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFormValues({ ...formValues, profileImage: file });
     }
   };
 
@@ -51,19 +59,36 @@ export default function AddRider() {
   };
 
   console.log(formValues);
-  const handleFormSubmit = async (e: any) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const formData = new FormData(); // Create a new FormData object
+
+    // Append text fields to FormData
+    formData.append("firstName", formValues.firstName);
+    formData.append("lastName", formValues.lastName);
+    formData.append("email", formValues.email);
+    formData.append("username", formValues.username);
+    formData.append("password", formValues.password);
+    formData.append("contactNumber", formValues.contactNumber);
+    formData.append("gender", formValues.gender);
+    formData.append("address", formValues.address);
+    formData.append("status", formValues.status);
+
+    // Append image file to FormData if it exists
+    if (formValues.profileImage) {
+      formData.append("profileImage", formValues.profileImage);
+    }
+
     try {
       const result = await fetch("http://localhost:3000/api/riders/add-rider", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formValues),
+        body: formData, // Use FormData in the body
       });
-      console.log(result);
+      const data = await result.json();
+      console.log(data); // Handle response data
     } catch (e) {
-      console.log(e);
+      console.log(e); // Handle errors
     }
   };
 
@@ -92,7 +117,11 @@ export default function AddRider() {
               <Box sx={{ p: 2, pb: 1, placeItems: "center" }}>
                 <div className="relative mb-3">
                   <img
-                    src={formValues.profileImage}
+                    src={
+                      typeof formValues.profileImage === "string"
+                        ? formValues.profileImage
+                        : URL.createObjectURL(formValues.profileImage)
+                    }
                     className="w-24 h-24 border-1 rounded-full"
                   />
                   <div
@@ -211,7 +240,7 @@ export default function AddRider() {
                         });
                       }}
                       placeholder="First Name"
-                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[300px] "
+                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[440px] "
                     />
                   </div>
                   <div className="flex flex-col">
@@ -221,7 +250,7 @@ export default function AddRider() {
                     <input
                       type="text"
                       placeholder="Last Name"
-                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[300px] "
+                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[440px] "
                       value={formValues.lastName}
                       onChange={(e) => {
                         setFormValues({
@@ -240,7 +269,7 @@ export default function AddRider() {
                     <input
                       type="email"
                       placeholder="Email"
-                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[300px] "
+                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[440px] "
                       value={formValues.email}
                       onChange={(e) => {
                         setFormValues({
@@ -258,7 +287,7 @@ export default function AddRider() {
                     <input
                       type="text"
                       placeholder="Username"
-                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[300px] "
+                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[440px] "
                       value={formValues.username}
                       onChange={(e) => {
                         setFormValues({
@@ -277,7 +306,7 @@ export default function AddRider() {
                     <input
                       type="password"
                       placeholder="Password"
-                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[300px] "
+                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[440px] "
                       value={formValues.password}
                       onChange={(e) => {
                         setFormValues({
@@ -294,7 +323,7 @@ export default function AddRider() {
                     <input
                       type="text"
                       placeholder="Contact Number"
-                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[300px] "
+                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[440px] "
                       value={formValues.contactNumber}
                       onChange={(e) => {
                         setFormValues({
@@ -311,7 +340,7 @@ export default function AddRider() {
                       Gender <span className="text-red-500">*</span>
                     </label>
                     <select
-                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[300px] "
+                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[440px] "
                       value={formValues.gender}
                       onChange={(e) =>
                         setFormValues({ ...formValues, gender: e.target.value })
@@ -329,7 +358,7 @@ export default function AddRider() {
                     <input
                       type="text"
                       placeholder="Address"
-                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[300px] "
+                      className="border-2 bg-[#f7f9ff] p-2 rounded-lg min-w-[440px] "
                       value={formValues.address}
                       onChange={(e) => {
                         setFormValues({
