@@ -1,3 +1,4 @@
+import PaginationTable from "@/components/PaginationTable";
 import { useEffect, useState } from "react";
 
 type Props = {};
@@ -24,6 +25,7 @@ const RiderList = (props: Props) => {
   console.log(riders);
   return (
     <div>
+      <PaginationTable />
       {riders.map((rider: any) => (
         <img src={rider.profileImage} />
       ))}
