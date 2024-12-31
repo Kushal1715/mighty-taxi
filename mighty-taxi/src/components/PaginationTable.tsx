@@ -1,54 +1,81 @@
-import * as React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
+  { field: "name", headerName: "Name", width: 130 },
+  { field: "email", headerName: "Email", width: 130 },
   {
-    field: "age",
-    headerName: "Age",
+    field: "contactNumber",
+    headerName: "Contact Number",
     type: "number",
-    width: 90,
+    width: 130,
   },
   {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
+    field: "lastActivedAt",
+    headerName: "Last Actived At",
     width: 160,
-    valueGetter: (value, row) => `${row.firstName || ""} ${row.lastName || ""}`,
+  },
+  {
+    field: "appVersion",
+    headerName: "App Version",
+    width: 130,
+  },
+  {
+    field: "createdDate",
+    headerName: "Created Date",
+    width: 160,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 130,
+  },
+  {
+    field: "action",
+    headerName: "Action",
+    width: 160,
   },
 ];
 
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
+// Props type
+type Props = {
+  riders: any;
+};
 
-const paginationModel = { page: 0, pageSize: 5 };
+export default function PaginationTable({ riders }: Props) {
+  // Map riders to match rows structure
+  const rows = riders.map((rider: any, index: number) => ({
+    id: rider.id || index + 1, // Fallback to index if id is missing
+    name: rider.firstName + rider.lastName,
+    email: rider.email || "N/A",
+    contactNumber: rider.contactNumber || "N/A",
+    lastActivedAt: rider.updatedAt || "-",
+    appVersion: rider.appVersion || "-",
+    createdDate: rider.createdAt,
+    status: rider.status,
+    action: "Update Delete",
+  }));
 
-export default function PaginationTable() {
+  const paginationModel = { page: 0, pageSize: 10 };
+
   return (
     <>
-      <Paper sx={{ height: 400, width: "100%" }}>
-        <h1>Rider List</h1>
-
+      <Paper
+        sx={{
+          height: 500,
+          width: "100%",
+        }}
+      >
         <DataGrid
           rows={rows}
           columns={columns}
           initialState={{ pagination: { paginationModel } }}
           pageSizeOptions={[5, 10]}
-          checkboxSelection
-          sx={{ border: 0 }}
+          sx={{
+            border: 0,
+            fontSize: "16px",
+          }}
         />
       </Paper>
     </>
